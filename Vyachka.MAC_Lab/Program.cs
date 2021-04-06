@@ -26,7 +26,7 @@ namespace Vyachka.MAC_Lab
                 {
                     NetInterface netInterface = new NetInterface(ip, GetSubnetMask(ip));
                     interfaces.Add(netInterface);
-                    Console.WriteLine($"MAC-address: {MAC.ConvertIpToMAC(netInterface.IP.ToString(), 0.ToString())} " +
+                    Console.WriteLine($"MAC-address: {MAC.GetMAC(netInterface.IP.ToString(), 0.ToString())} " +
                         $"IP: {netInterface.IP}  Mask: {netInterface.Mask}");
                 }
             }

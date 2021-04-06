@@ -9,7 +9,7 @@ namespace Vyachka.MAC_Lab
         [DllImport("iphlpapi.dll", ExactSpelling = true)]
         public static extern int SendARP(uint DestIP, uint SrcIP, byte[] pMacAddr, ref int PhyAddrLen);
 
-        public static string ConvertIpToMAC(string destIP, string srcIP)
+        public static string GetMAC(string destIP, string srcIP)
         {
             IPAddress dst = IPAddress.Parse(destIP);
             IPAddress src = IPAddress.Parse(srcIP);

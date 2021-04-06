@@ -100,7 +100,7 @@ namespace Vyachka.MAC_Lab
                     }
 
                     Console.WriteLine($"IP: {ipAddress}");
-                    Console.WriteLine($"MAC-address: {MAC.ConvertIpToMAC(ipAddress.ToString(), srcIP.ToString())}");
+                    Console.WriteLine($"MAC-address: {MAC.GetMAC(ipAddress.ToString(), srcIP.ToString())}");
                     Console.WriteLine("------------------------------");
                 }
 
