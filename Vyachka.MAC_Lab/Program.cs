@@ -12,7 +12,7 @@ namespace Vyachka.MAC_Lab
         public static void Main()
         {
             string hostName = Dns.GetHostName();
-            Console.WriteLine($"Имя устройства: {hostName}");
+            Console.WriteLine($"Device name: {hostName}");
             ArrayList interfaces = new ArrayList();
             foreach (var ip in Dns.GetHostEntry(hostName).AddressList)
             {
@@ -20,18 +20,12 @@ namespace Vyachka.MAC_Lab
                 {
                     NetInterface netInterface = new NetInterface(ip, GetSubnetMask(ip));
                     interfaces.Add(netInterface);
-                    Console.WriteLine($"MAC-адрес интерфейса: {MAC.ConvertIpToMAC(netInterface.IP.ToString(), 0.ToString())} " +
-                        $"IP-адрес: {netInterface.IP}  Маска сети: {netInterface.Mask}");
+                    Console.WriteLine($"MAC-address: {MAC.ConvertIpToMAC(netInterface.IP.ToString(), 0.ToString())} " +
+                        $"IP: {netInterface.IP}  Mask: {netInterface.Mask}");
                 }
             }
 
-            /*Console.WriteLine("Интерфейсы:");
-            foreach(NetInterface netInterface in interfaces)
-            {
-                Console.WriteLine($"IP-адрес: {netInterface.IP}  Маска сети: {netInterface.Mask}");
-            }*/
-
-            Console.WriteLine("\nАктивные устройства в подсети:");
+            Console.WriteLine("\nNodes:");
             Console.WriteLine("------------------------------");
 
             foreach(NetInterface netInterface in interfaces)
@@ -46,8 +40,7 @@ namespace Vyachka.MAC_Lab
         {
             foreach (var adapter in NetworkInterface.GetAllNetworkInterfaces())
             {
-                foreach (var unicastIPAddressInformation in adapter.GetIPProperties()
-                    .UnicastAddresses)
+                foreach (var unicastIPAddressInformation in adapter.GetIPProperties().UnicastAddresses)
                 {
                     if (unicastIPAddressInformation.Address.AddressFamily == AddressFamily.InterNetwork)
                     {

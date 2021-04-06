@@ -76,20 +76,26 @@ namespace Vyachka.MAC_Lab
             {
                 Ping ping = new Ping();
                 IPAddress ipAddress = GetIP(startIP);
+                if(interfaceIP == startIP)
+                {
+                    startIP++;
+                    continue;
+                }
+
                 PingReply pingReply = ping.Send(ipAddress, _timeToWait);
                 if (pingReply != null && pingReply.Status == IPStatus.Success)
                 {
                     try
                     {
-                        Console.WriteLine($"Имя: {Dns.GetHostEntry(ipAddress).HostName}");
+                        Console.WriteLine($"Name: {Dns.GetHostEntry(ipAddress).HostName}");
                     }
                     catch (Exception)
                     {
-                        Console.WriteLine("Имя: произошла ошибка при получении");
+                        Console.WriteLine("Name: failed getting name");
                     }
 
-                    Console.WriteLine($"IP-адрес: {ipAddress}");
-                    Console.WriteLine($"MAC-адрес: {MAC.ConvertIpToMAC(ipAddress.ToString(), srcIP.ToString())}");
+                    Console.WriteLine($"IP: {ipAddress}");
+                    Console.WriteLine($"MAC-address: {MAC.ConvertIpToMAC(ipAddress.ToString(), srcIP.ToString())}");
                     Console.WriteLine("------------------------------");
                 }
 
