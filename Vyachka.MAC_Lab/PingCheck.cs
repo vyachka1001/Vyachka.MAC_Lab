@@ -62,6 +62,11 @@ namespace Vyachka.MAC_Lab
             {
                 threads[i].Start(data[i]);
             }
+
+            for (int i = 0; i < amountOfThreads; i++)
+            {
+                threads[i].Join();
+            }
         }
 
         private static void ThreadFunc(object obj)

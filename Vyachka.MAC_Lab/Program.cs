@@ -16,6 +16,12 @@ namespace Vyachka.MAC_Lab
             ArrayList interfaces = new ArrayList();
             foreach (var ip in Dns.GetHostEntry(hostName).AddressList)
             {
+                if (ip.Equals(IPAddress.Parse("127.0.0.1")))
+                {
+                    Console.WriteLine("You are not connected to the Internet");
+                    return;
+                }
+               
                 if (!ip.ToString().Contains(":"))
                 {
                     NetInterface netInterface = new NetInterface(ip, GetSubnetMask(ip));
@@ -33,7 +39,9 @@ namespace Vyachka.MAC_Lab
                 PingCheck.PreparationToPing(netInterface);
             }
 
-            Console.WriteLine();
+
+            Console.WriteLine("Press any key to exit.");
+            Console.Read();
         }
 
         public static IPAddress GetSubnetMask(IPAddress address)
